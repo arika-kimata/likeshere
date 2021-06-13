@@ -1,0 +1,15 @@
+<main class="main">
+  <div class="inner">
+    <% if user_signed_in? %>
+      <div class="greeting">
+        <%= "こんにちは、" %>
+        <%= link_to current_user.nickname, edit_user_password_path(current_user),
+         class: :greeting__link%>
+        <%= "さん" %>
+      </div>
+    <% end %>
+    <div class="card__wrapper">
+      <%# render partial: "hobby", collection: @hobby %>
+    </div>
+  </div>
+</main>

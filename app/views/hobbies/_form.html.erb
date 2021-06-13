@@ -1,0 +1,50 @@
+<%= form_with model: @hobby, local: true do |f|%>
+  <div class="field">
+    <span class="indispensable">必須</span>
+    <%= f.label :title, "作品名" %><br />
+    <%= f.text_field :title, id:"hobby_title" %>
+  </div>
+
+  <div class="field">
+    <span class="indispensable">必須</span>
+    <%= f.label :synopsis, "大まかなあらすじ" %><br />
+    <%= f.text_area :synopsis, class: :form__text, id:"hobby_catch_copy" %>
+  </div>
+
+  <div class="field">
+    <span class="indispensable">必須</span>
+    <%= f.label :recommended, "おすすめポイント" %><br />
+    <%= f.text_area :recommended, class: :form__text, id:"hobby_concept" %>
+  </div>
+
+  <div class="field">
+    <span class="indispensable">必須</span>
+    <%= f.label :release_date, "公開・発売年月日" %><br />
+    <%= raw sprintf(
+                    f.date_select(
+                      :birthday,
+                      class:'select-release',
+                      id:"release-date",
+                      use_month_numbers: true,
+                      prompt:'--',
+                      start_year: 1930,
+                      end_year: (Time.now.year - 1),
+                      date_separator: '%s'),
+                    "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+  </div>
+
+  <div class="field">
+    <div class="pulldown">
+      <span class="indispensable">必須</span>
+      <%= f.label :category, "カテゴリー" %><br />
+      <ul class="categories" %>
+        <li class="category"><%= f.select :category, @category_parent_array, {}, { class: 'listing-select-wrapper__box--select', id: 'parent_category'} %></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "保存する", class: :form__btn  %>
+  </div>
+
+<% end %>
