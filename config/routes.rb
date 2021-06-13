@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root 'hobby#index'
+  root 'hobbies#index'
 
   resources :hobbies, only: [:index, :new, :create] do
     collection do
