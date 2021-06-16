@@ -48,7 +48,7 @@
 | --------- | ------ | ----------- |
 | movie     | string | null: false |
 | drama     | string | null: false |
-| animation | string | null: false |
+| anime | string | null: false |
 | game      | string | null: false |
 
 ### Association
