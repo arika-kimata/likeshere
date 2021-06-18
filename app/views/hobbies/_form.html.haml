@@ -32,10 +32,13 @@
   .field
     %span.indispensable 必須
     =f.label "カテゴリ"
+    %br/
     .form-title__required
       %label
   .form-input-select
-    = f.select :category, @category_parent_array, {}, {class: 'listing-select-wrapper__box--select', id: 'parent_category'}
-  .listing-product-detail__category
+    = f.select :category_id, @category_parent_array, {}, {class: 'listing-select-wrapper__box--select', id: 'parent_category'}
+  .pulldown.hobby_input__body__category__children#children_box
+  .pulldown.hobby_input__body__category__grandchildren#grandchildren_box
+  %br/
   .actions
     = f.submit "保存する", class: :form__btn

@@ -10,7 +10,7 @@ class Category < ApplicationRecord
     return category_parent_array
   end
 
-  def self.maltilevel_category_create(parent_id, children_id, grandchildren_id)
+  def self.maltilevel_category_create(category_id, parent_id, children_id, grandchildren_id)
     if parent_id.present? && parent_id != '--'
       category = Category.find(parent_id)
     end
@@ -23,4 +23,5 @@ class Category < ApplicationRecord
       category = Category.find(grandchildren_id)
     end
   end
+  
 end

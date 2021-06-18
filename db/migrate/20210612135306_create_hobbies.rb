@@ -6,7 +6,7 @@ class CreateHobbies < ActiveRecord::Migration[6.0]
       t.string :recommended,     null: false
       t.string :synopsis,        null: false
       t.references :user,        foreign_key: true
-      t.bigint :category_id,     foreign_key: true
+      t.references :category
 
       t.timestamps
     end

@@ -3,7 +3,12 @@ class Hobby < ApplicationRecord
   belongs_to :user
 
   with_options presence: true do
-    validates :title, :release_date, :recommended, :synopsis, :category_id, :user_id
+    validates :title, :recommended, :synopsis, :user_id
+  end
+
+  with_options presence: { message: 'が未選択です。' } do
+    validates :release_date
+    validates :category
   end
   
 end

@@ -2,7 +2,7 @@ class HobbiesController < ApplicationController
   before_action :set_category, only: [:new, :create]#:edit, :update, :destroy]
 
   def index
-    #@hobby = Hobby.includes(:user).order("created_at DESC")
+    @hobby = Hobby.includes(:user).order("created_at DESC")
   end
 
   def new
@@ -14,6 +14,7 @@ class HobbiesController < ApplicationController
   end
 
   def create
+    #binding.pry
     @hobby = Hobby.new(hobby_params)
     @hobby.user_id == current_user.id
     if @hobby.valid?
