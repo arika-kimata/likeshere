@@ -1,0 +1,26 @@
+%main.main
+  .inner
+    .type__wrapper
+      %p.hobby__hedding
+        = "プロトタイプのタイトル"
+      = link_to "by プロトタイプの投稿者", root_path, class: :hobby__user
+      .hobby__manage
+        = link_to "編集する", root_path, class: :hobby__btn
+        = link_to "削除する", root_path, class: :hobby__btn
+      .hobby__image
+        = image_tag "プロトタイプの画像"
+      .hobby__body
+        .hobby__detail
+          %p.detail__title キャッチコピー
+          %p.detail__message
+            = "プロトタイプのキャッチコピー"
+        .hobby__detail
+          %p.detail__title コンセプト
+          %p.detail__message
+            = "プロトタイプのコンセプト"
+      .hobby__comments
+        .field
+          %br/
+        .actions
+        %ul.comments_lists
+          %li.comments_list

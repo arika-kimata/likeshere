@@ -1,0 +1,18 @@
+.main
+  .inner
+    .form__wrapper
+      %h2.page-heading ユーザーログイン
+      .login-flash-message
+        %flash[:notice]
+        %flash[:alert]
+      = form_with model: @user, url: user_session_path, id: 'new_user', class: 'new_user', local: true do |f|
+        .field
+          = f.label :email, "メールアドレス"
+          %br/
+          = f.email_field :email, id:"user_email", autofocus: true, autocomplete: "email"
+        .field
+          = f.label :password, "パスワード（6文字以上）"
+          %br/
+          = f.password_field :password, id:"user_password", autocomplete: "current-password"
+        .actions
+          = f.submit "ログイン", class: :form__btn

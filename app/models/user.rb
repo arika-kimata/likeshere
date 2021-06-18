@@ -16,4 +16,7 @@ class User < ApplicationRecord
     
     # プロフィール
     validates :profile, presence: true
+
+    # バリデーション
+    has_many :hobbies
 end

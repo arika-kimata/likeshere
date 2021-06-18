@@ -1,0 +1,44 @@
+= form_with model: @hobby, local: true do |f|
+  .field
+    %span.indispensable 必須
+    = f.label :title, "作品名"
+    %br/
+    = f.text_field :title, id:"hobby_title"
+  .field
+    %span.indispensable 必須
+    = f.label :synopsis, "大まかなあらすじ"
+    %br/
+    = f.text_area :synopsis, class: :form__text, id:"hobby_catch_copy"
+  .field
+    %span.indispensable 必須
+    = f.label :recommended, "おすすめポイント"
+    %br/
+    = f.text_area :recommended, class: :form__text, id:"hobby_concept"
+  .field
+    %span.indispensable 必須
+    = f.label :release_date, "公開・発売年月日"
+    %br/
+    = raw sprintf(                               |
+      f.date_select(                             |
+        :release_date,                           |
+        class:'select-release',                  |
+        id:"release-date",                       |
+        use_month_numbers: true,                 |
+        prompt:'--',                             |
+        start_year: 1930,                        |
+        end_year: (Time.now.year - 1),           |
+        date_separator: '%s'),                   |
+      "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" |
+  .field
+    %span.indispensable 必須
+    =f.label "カテゴリ"
+    %br/
+    .form-title__required
+      %label
+  .form-input-select
+    = f.select :category_id, @category_parent_array, {}, {class: 'listing-select-wrapper__box--select', id: 'parent_category'}
+  .pulldown.hobby_input__body__category__children#children_box
+  .pulldown.hobby_input__body__category__grandchildren#grandchildren_box
+  %br/
+  .actions
+    = f.submit "保存する", class: :form__btn
