@@ -12,7 +12,7 @@ window.onload = function(){
     var childSelectHtml = '';
     childSelectHtml = `<div class='listing-select-wrapper__added' id= 'children_wrapper'>
                         <div class='listing-select-wrapper__box'>
-                          <select class="listing-select-wrapper__box--select" id="child_category" name="">
+                          <select class="listing-select-wrapper__box--select" id="child_category" name="hobby[category_id">
                             <option value="---" data-category="---">---</option>
                             ${insertHTML}
                           <select>

@@ -2,7 +2,8 @@ class HobbiesController < ApplicationController
   before_action :set_category, only: [:new, :create]#:edit, :update, :destroy]
 
   def index
-    @hobby = Hobby.includes(:user).order("created_at DESC")
+    @hobbies = Hobby.includes(:user).order("created_at DESC")
+    #binding.pry
   end
 
   def new
@@ -14,7 +15,6 @@ class HobbiesController < ApplicationController
   end
 
   def create
-    #binding.pry
     @hobby = Hobby.new(hobby_params)
     @hobby.user_id == current_user.id
     if @hobby.valid?
@@ -41,6 +41,13 @@ class HobbiesController < ApplicationController
 
   def get_category_grandchildren
     @category_grandchildren = Category.find("#{params[:child_id]}").children
+  end
+
+  def show
+    @hobbies = Hobby.find(params[:id])
+    @category_grandchild = @hobbies.category
+    @category_child = @category_grandchild.parent
+    @category_parent = @category_child.parent
   end
 
   private

@@ -1,26 +1,33 @@
 %main.main
   .inner
-    .type__wrapper
-      %p.hobby__hedding
-        = "プロトタイプのタイトル"
-      = link_to "by プロトタイプの投稿者", root_path, class: :hobby__user
-      .hobby__manage
-        = link_to "編集する", root_path, class: :hobby__btn
-        = link_to "削除する", root_path, class: :hobby__btn
-      .hobby__image
-        = image_tag "プロトタイプの画像"
-      .hobby__body
-        .hobby__detail
-          %p.detail__title キャッチコピー
-          %p.detail__message
-            = "プロトタイプのキャッチコピー"
-        .hobby__detail
-          %p.detail__title コンセプト
-          %p.detail__message
-            = "プロトタイプのコンセプト"
-      .hobby__comments
-        .field
-          %br/
-        .actions
-        %ul.comments_lists
-          %li.comments_list
+    .detail-title
+      = @hobbies.title
+    %br.type__wrapper
+      %table.detail-table
+        %tr
+          %th.detail-hobby 投稿者
+          %td.detail-value 
+            = link_to "#{@hobbies.user.nickname}", "#"
+        %tr
+          %th.detail-hobby 大まかなあらすじ
+          %td.detail-value
+            = @hobbies.synopsis
+        %tr
+          %th.detail-hobby おすすめポイント
+          %td.detail-value
+            = @hobbies.recommended
+        %tr
+          %th.detail-hobby 公開年月日
+          %td.detail-value
+            = @hobbies.release_date
+        %tr
+          %th.detail-hobby カテゴリー
+          %td.detail-value
+            - if [1, 23, 44, 64].include?(@category_id)
+              = link_to "#{@category_grandchild.category}","#"
+            - else
+              = link_to @category_parent.name,"#"
+              = '/'
+              = link_to @category_child.name,"#"
+              = '/'
+              = link_to @category_grandchild.name,"#"
