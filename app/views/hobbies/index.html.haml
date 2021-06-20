@@ -3,15 +3,15 @@
     - if user_signed_in?
       .greeting
         = "こんにちは、"
-        = link_to current_user.nickname, user_path(current_user), |
+        = link_to current_user.nickname, edit_user_password_path(current_user), |
           class: :greeting__link                                                |
         = "さん"
     .card__wrapper
       .card__tops
         - @hobbies.each do |hobby|
           .card__top
-            = link_to hobby.title, hobby_path(@hobbies.ids), method: :get, class: :card__title
+            = link_to hobby.title, hobby_path(hobby.id), method: :get, class: :card__title
             .card__body
               = hobby.recommended
               %p.card__summary
-              = link_to hobby.user.nickname, "#" , class: :card__user
+              = link_to hobby.user.nickname, user_path(hobby.user.id) , class: :card__user
