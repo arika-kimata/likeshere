@@ -1,11 +1,7 @@
 %main.main
   .inner
-    - if user_signed_in?
-      .greeting
-        = "こんにちは、"
-        = link_to current_user.nickname, edit_user_password_path(current_user), |
-          class: :greeting__link                                                |
-        = "さん"
+    .greeting2
+      = "Everyone's  favorite"
     .card__wrapper
       .card__tops
         - @hobbies.each do |hobby|

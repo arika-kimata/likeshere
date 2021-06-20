@@ -136,8 +136,16 @@ a {
 /* メイン */
 
 .greeting{
-  margin-bottom: 20px;
+  margin: 20px 0 auto;
+  color: #999;
 }
+
+.greeting2{
+  margin: 20px 0 auto;
+  color: #87CEFA;
+  font-size: 30px;
+}
+
 .greeting__link{
   text-decoration: underline;
 }
