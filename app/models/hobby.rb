@@ -7,7 +7,7 @@ class Hobby < ApplicationRecord
   end
 
  # 公開年月日
-  with_options numericality: { greater_than_or_equal_to: 1, message: 'が未選択です。' } do
+  with_options presence: { message: 'が未選択です。' } do
     validates :release_date
   end
 

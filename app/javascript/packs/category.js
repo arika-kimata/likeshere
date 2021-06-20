@@ -2,7 +2,6 @@ window.onload = function(){
 
   //子カテゴリー、孫カテゴリーのセレクトボックスの選択肢
   function appendOption(category){
-    //value="${category.name}"については、ストロングパラメーターでの値の取り方によってcategory.idの場合もあると思います。
     var html = `<option value="${category.id}" data-category="${category.id}">${category.name}</option>`;
     return html;
   }
@@ -12,7 +11,7 @@ window.onload = function(){
     var childSelectHtml = '';
     childSelectHtml = `<div class='listing-select-wrapper__added' id= 'children_wrapper'>
                         <div class='listing-select-wrapper__box'>
-                          <select class="listing-select-wrapper__box--select" id="child_category" name="">
+                          <select class="listing-select-wrapper__box--select" id="child_category" name="hobby[category_id">
                             <option value="---" data-category="---">---</option>
                             ${insertHTML}
                           <select>
@@ -44,7 +43,7 @@ window.onload = function(){
       $.ajax({
         url: 'get_category_children',
         type: 'GET',
-        //コントローラーに飛ばす値です。
+        //コントローラーに飛ばす値
         data: { parent_name: parentCategory },
         dataType: 'json'
       })
