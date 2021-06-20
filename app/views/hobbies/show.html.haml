@@ -1,33 +1,42 @@
 %main.main
   .inner
+    - if user_signed_in? && current_user.id == @hobby.user_id
+      .hobby__manage
+        = link_to "編集する", edit_hobby_path, class: :hobby__btn
+        = link_to "削除する", hobby_path(@hobby), method: :delete, class: :hobby__btn
     .detail-title
-      = @hobbies.title
+      = @hobby.title
     %br.type__wrapper
       %table.detail-table
         %tr
           %th.detail-hobby 投稿者
           %td.detail-value 
-            = link_to "#{@hobbies.user.nickname}", "#"
+            = link_to "#{@hobby.user.nickname}", "#"
         %tr
           %th.detail-hobby 大まかなあらすじ
           %td.detail-value
-            = @hobbies.synopsis
+            = @hobby.synopsis
         %tr
           %th.detail-hobby おすすめポイント
           %td.detail-value
-            = @hobbies.recommended
+            = @hobby.recommended
         %tr
           %th.detail-hobby 公開年月日
           %td.detail-value
-            = @hobbies.release_date
+            = @hobby.release_date
         %tr
           %th.detail-hobby カテゴリー
           %td.detail-value
             - if [1, 23, 44, 64].include?(@category_id)
               = link_to "#{@category_grandchild.category}","#"
             - else
-              = link_to @category_parent.name,"#"
-              = '/'
-              = link_to @category_child.name,"#"
-              = '/'
-              = link_to @category_grandchild.name,"#"
+              - if @category_parent == nil
+                = link_to @category_child.name,"#"
+                = '/'
+                = link_to @category_grandchild.name,"#"
+              - else
+                = link_to @category_parent.name,"#"
+                = '/'
+                = link_to @category_child.name,"#"
+                = '/'
+                = link_to @category_grandchild.name,"#"

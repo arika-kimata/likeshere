@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  has_many :items
+  has_many :hobbies
   has_ancestry
 
   def self.category_parent_array_create

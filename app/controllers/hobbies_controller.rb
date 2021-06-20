@@ -1,5 +1,6 @@
 class HobbiesController < ApplicationController
-  before_action :set_category, only: [:new, :create]#:edit, :update, :destroy]
+  before_action :set_category, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_hobby, only: [:show, :edit, :update, :destroy]
 
   def index
     @hobbies = Hobby.includes(:user).order("created_at DESC")
@@ -26,6 +27,7 @@ class HobbiesController < ApplicationController
         params[:grandchildren_id]
       )
       redirect_to root_path
+      flash[:notice] = "投稿が完了しました。"
     else
       @category_parent_array = ["---"]
       Category.where(ancestry: nil).each do |parent|
@@ -44,13 +46,61 @@ class HobbiesController < ApplicationController
   end
 
   def show
-    @hobbies = Hobby.find(params[:id])
-    @category_grandchild = @hobbies.category
+    @category_grandchild = @hobby.category
     @category_child = @category_grandchild.parent
     @category_parent = @category_child.parent
   end
 
+  def edit
+    @grandchild_category = @hobby.category
+    @child_category = @grandchild_category.parent 
+    @category_parent = @child_category.parent
+  
+    #カテゴリー一覧を作成
+    @category = Category.find(params[:id])
+    # 紐づく孫カテゴリーの親（子カテゴリー）の一覧を配列で取得
+    @category_children = @hobby.category.parent.parent.children
+    # 紐づく孫カテゴリーの一覧を配列で取得
+    @category_grandchildren = @hobby.category.parent.children
+  end
+
+  def update
+    # 編集画面で選択された新しいカテゴリー
+    @category_grandchild = Category.find(hobby_params[:category_id])
+    @category_child = @category_grandchild.parent
+    @category_parent = @category_child.parent
+    if @hobby.update(hobby_params)
+      category = Category.where(hoby_id: @hobby.id)
+      category.destroy_all
+      Category.maltilevel_category_create(
+        @hobby,
+        params[:parent_id],
+        params[:children_id],
+        params[:grandchildren_id]
+      )
+      redirect_to @hobby
+      flash[:notice] = "投稿の編集が完了しました。"
+    else
+      @category_parent_array = Category.category_parent_array_create
+      render :edit
+    end
+  end
+
+  def destroy
+    if @hobby.destroy
+      redirect_to root_path
+      flash[:notice] = "投稿を削除しました。"
+    else
+      redirect_back(fallback_location: root_path)
+      flash[:alert] = "投稿の削除に失敗しました。"
+    end
+  end
+
   private
+
+  def set_hobby
+    @hobby = Hobby.find(params[:id])
+  end
 
   def set_category
     @category_parent_array = Category.where(ancestry: nil)
