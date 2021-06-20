@@ -40,3 +40,13 @@
                 = link_to @category_child.name,"#"
                 = '/'
                 = link_to @category_grandchild.name,"#"
+
+    %script{ type: 'javascript/channels', src: 'message_channel.js'}
+    - if signed_in?
+      = form_with model: [@hobby, @message], local: true do |f|
+        = f.text_area :text, class: 'comment-text', id: 'comment_text'
+        %p.comment-warn
+          = '相手のことを考え、丁寧なコメントを心がけましょう。'
+          %br= '不快な言葉遣いなどは、利用制限や退会処分となります。'
+        .actions
+          = f.submit "投稿する", class: :form__btn
