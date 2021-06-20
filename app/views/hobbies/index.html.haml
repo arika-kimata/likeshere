@@ -10,8 +10,8 @@
       .card__tops
         - @hobbies.each do |hobby|
           .card__top
-            = link_to hobby.title, hobby_path(@hobbies.ids), method: :get, class: :card__title
+            = link_to hobby.title, hobby_path(hobby.id), method: :get, class: :card__title
             .card__body
               = hobby.recommended
               %p.card__summary
-              = link_to hobby.user.nickname, "#" , class: :card__user
+              = link_to hobby.user.nickname, user_path(hobby.user.id) , class: :card__user
