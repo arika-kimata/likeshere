@@ -1,0 +1,26 @@
+.main
+  .inner
+    .user__wrapper
+      .page-heading
+        = @user.nickname
+        = 'さんの情報'
+      %table.detail-table
+        %tr
+          %th.detail-hobby ユーザー名
+          %td.detail-value
+            = @user.nickname
+        %tr
+          %th.detail-hobby プロフィール
+          %td.detail-value
+            = @user.profile
+      .page-heading
+        = @user.nickname
+        = 'さんのおすすめ作品一覧'
+        .user__card
+        - @hobbies.each do |hobby|
+          .card__top
+            = link_to hobby.title, hobby_path(@hobbies.ids), method: :get, class: :card__title
+            .card__body
+              %p.card__summary
+                = hobby.recommended
+                = link_to hobby.user.nickname, user_path(hobby.user.id) , class: :card__user
