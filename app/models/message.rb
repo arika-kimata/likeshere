@@ -1,8 +1,8 @@
 class Message < ApplicationRecord
- # バリデーション
+  # バリデーション
   validates :text, presence: true
 
- # アソシエーション
+  # アソシエーション
   belongs_to :user
   belongs_to :hobby
 end

@@ -3,13 +3,13 @@ class HobbiesController < ApplicationController
   before_action :set_hobby, only: [:show, :edit, :update, :destroy]
 
   def index
-    @hobbies = Hobby.includes(:user).order("created_at DESC")
-    #binding.pry
+    @hobbies = Hobby.includes(:user).order('created_at DESC')
+    # binding.pry
   end
 
   def new
     @hobby = Hobby.new
-    @category_parent_array = ["---"]
+    @category_parent_array = ['---']
     Category.where(ancestry: nil).each do |parent|
       @category_parent_array << parent.name
     end
@@ -27,9 +27,9 @@ class HobbiesController < ApplicationController
         params[:grandchildren_id]
       )
       redirect_to root_path
-      flash[:notice] = "投稿が完了しました。"
+      flash[:notice] = '投稿が完了しました。'
     else
-      @category_parent_array = ["---"]
+      @category_parent_array = ['---']
       Category.where(ancestry: nil).each do |parent|
         @category_parent_array << parent.name
       end
@@ -38,11 +38,11 @@ class HobbiesController < ApplicationController
   end
 
   def get_category_children
-    @category_children = Category.find_by(name: "#{params[:parent_name]}", ancestry: nil).children
+    @category_children = Category.find_by(name: params[:parent_name].to_s, ancestry: nil).children
   end
 
   def get_category_grandchildren
-    @category_grandchildren = Category.find("#{params[:child_id]}").children
+    @category_grandchildren = Category.find(params[:child_id].to_s).children
   end
 
   def show
@@ -78,7 +78,7 @@ class HobbiesController < ApplicationController
         params[:grandchildren_id]
       )
       redirect_to @hobby
-      flash[:notice] = "投稿の編集が完了しました。"
+      flash[:notice] = '投稿の編集が完了しました。'
     else
       @category_parent_array = Category.category_parent_array_create
       render :edit
@@ -88,10 +88,10 @@ class HobbiesController < ApplicationController
   def destroy
     if @hobby.destroy
       redirect_to root_path
-      flash[:notice] = "投稿を削除しました。"
+      flash[:notice] = '投稿を削除しました。'
     else
       redirect_back(fallback_location: root_path)
-      flash[:alert] = "投稿の削除に失敗しました。"
+      flash[:alert] = '投稿の削除に失敗しました。'
     end
   end
 
@@ -108,5 +108,4 @@ class HobbiesController < ApplicationController
   def hobby_params
     params.require(:hobby).permit(:title, :release_date, :recommended, :synopsis, :category_id).merge(user_id: current_user.id)
   end
-
 end

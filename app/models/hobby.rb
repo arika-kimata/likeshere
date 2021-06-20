@@ -1,18 +1,17 @@
 class Hobby < ApplicationRecord
- # バリデーション
+  # バリデーション
 
- # タイトル、あらすじ、おすすめポイント
+  # タイトル、あらすじ、おすすめポイント
   with_options presence: true do
     validates :title, :synopsis, :recommended, :user_id
   end
 
- # 公開年月日
+  # 公開年月日
   with_options presence: { message: 'が未選択です。' } do
     validates :release_date
   end
 
- # アソシエーション
+  # アソシエーション
   belongs_to :category
   belongs_to :user
-  
 end
