@@ -3,7 +3,7 @@
     - if user_signed_in?
       .greeting
         = "こんにちは、"
-        = link_to current_user.nickname, edit_user_password_path(current_user), |
+        = link_to current_user.nickname, user_path(current_user), |
           class: :greeting__link                                                |
         = "さん"
     .card__wrapper
