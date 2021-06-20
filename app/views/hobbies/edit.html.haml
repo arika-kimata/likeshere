@@ -40,9 +40,10 @@
           .form-title__required
             %label
         .form-input-select
-          = f.collection_select :category_id, @category_parent_array, :id, :name,{ selected: @category_parent },{ class:"select" }
-          %br= f.collection_select :category_id, @category_children, :id, :name,{ selected: @category_child }, { class:"select", id: 'child_category' }
-          = f.collection_select :category_id, @category_grandchildren, :id, :name,{ selected: @category_grandchild },{ class:"select", id: 'grandchild_category' }
+          = f.collection_select :category_id, @category_parent_array, :id, :category, { selected: @category_parent },{ class:"select" }
+          = f.collection_select :category_id, @category_children, :id, :category,{ selected: @category_child}, {class:"select", id: "child_category"}
+          = f.collection_select :category_id, @category_grandchildren, :id, :category,{ selected: @category_grandchild},{class:"select", id: "grandchild_category"}
+                
         %br/
         .actions
           = f.submit "保存する", class: :form__btn

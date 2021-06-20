@@ -52,11 +52,10 @@ class HobbiesController < ApplicationController
   end
 
   def edit
-    @grandchild_category = @hobby.category
-    @child_category = @grandchild_category.parent 
-    @category_parent = @child_category.parent
-  
-    #カテゴリー一覧を作成
+    @category_grandchild = @hobby.category
+    @category_child = @category_grandchild.parent
+    @category_parent = @category_child.parent
+    # カテゴリー一覧を作成
     @category = Category.find(params[:id])
     # 紐づく孫カテゴリーの親（子カテゴリー）の一覧を配列で取得
     @category_children = @hobby.category.parent.parent.children

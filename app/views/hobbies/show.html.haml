@@ -2,7 +2,7 @@
   .inner
     - if user_signed_in? && current_user.id == @hobby.user_id
       .hobby__manage
-        = link_to "編集する", edit_hobby_path, class: :hobby__btn
+        = link_to "編集する", '#', class: :hobby__btn
         = link_to "削除する", hobby_path(@hobby), method: :delete, class: :hobby__btn
     .detail-title
       = @hobby.title
