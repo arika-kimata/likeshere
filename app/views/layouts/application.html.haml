@@ -16,10 +16,17 @@
         .nav
           .nav__left
             = link_to "LikeShere", root_path, class: :apptitle
+            .sub-title{ style: "color:#66cccc" }
+              = '~スキを探そう  シェアしよう~'
           - if user_signed_in?
             .nav__right
               = link_to "ログアウト", destroy_user_session_path, method: :delete, class: :nav__logout
               = link_to "New Like", new_hobby_path, class: :nav__btn
+              .greeting
+                = "こんにちは ! "
+                = link_to current_user.nickname, edit_user_password_path(current_user), |
+                  class: :greeting__link                                                |
+                = "さん"
           - else
             .nav__right
               = link_to "ログイン", user_session_path, class: :nav__btn

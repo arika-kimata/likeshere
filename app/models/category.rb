@@ -7,21 +7,14 @@ class Category < ApplicationRecord
     Category.where(ancestry: nil).each do |parent|
       category_parent_array << [parent.name, parent.id]
     end
-    return category_parent_array
+    category_parent_array
   end
 
-  def self.maltilevel_category_create(category_id, parent_id, children_id, grandchildren_id)
-    if parent_id.present? && parent_id != '--'
-      category = Category.find(parent_id)
-    end
+  def self.maltilevel_category_create(_category_id, parent_id, children_id, grandchildren_id)
+    category = Category.find(parent_id) if parent_id.present? && parent_id != '--'
 
-    if children_id.present? && children_id != '--'
-      category = Category.find(children_id)
-    end
+    category = Category.find(children_id) if children_id.present? && children_id != '--'
 
-    if grandchildren_id.present? && grandchildren_id != '--'
-      category = Category.find(grandchildren_id)
-    end
+    category = Category.find(grandchildren_id) if grandchildren_id.present? && grandchildren_id != '--'
   end
-  
 end
