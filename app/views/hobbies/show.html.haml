@@ -4,6 +4,8 @@
       .hobby__manage
         = link_to "編集する", '#', class: :hobby__btn
         = link_to "削除する", hobby_path(@hobby), method: :delete, class: :hobby__btn
+    .greeting2
+      = '▼ おすすめ作品名'
     .detail-title
       = @hobby.title
     %br.type__wrapper
@@ -41,12 +43,33 @@
                 = '/'
                 = link_to @category_grandchild.name,"#"
 
-    %script{ type: 'javascript/channels', src: 'message_channel.js'}
-    - if signed_in?
-      = form_with model: [@hobby, @message], local: true do |f|
-        = f.text_area :text, class: 'comment-text', id: 'comment_text'
-        %p.comment-warn
-          = '相手のことを考え、丁寧なコメントを心がけましょう。'
-          %br= '不快な言葉遣いなどは、利用制限や退会処分となります。'
-        .actions
-          = f.submit "投稿する", class: :form__btn
+    .comment-box
+      .greeting2
+        = '▼ コメント一覧'
+        - if @messages
+          #comments
+          - @messages.each do |message|
+            .comments_lists{data: {message_id: "#{message.id}"}}
+              .comment_top{ style: 'color:gray;' 'font-size: 15px;' 'display: flex;' 'justify-content: space-between;' }
+                %div
+                  = message.user.nickname
+                %div
+                  = l message.created_at
+              .comments_bottom{ style: 'color:black;' 'display: flex;' 'justify-content: flex-start;' }
+                %p
+                  = message.text
+              .comment_bottom_delete
+                -if user_signed_in? && current_user == message.user.id
+                  %button.comment__delete__button
+                    = link_to hobby_message_path(message.hobby.id, message.id), method: :delete do
+                      = icon('fa', 'trash')
+      .comment__form
+        %script{ type: 'javascript/channels', src: 'message_channel.js'}
+        - if signed_in?
+          = form_with model: [@hobby, @message], local: true do |f|
+            = f.text_area :text, class: 'comment-text', id: 'comment_text'
+            %p.comment-warn
+              = '相手のことを考え、丁寧なコメントを心がけましょう。'
+              %br= '不快な言葉遣いなどは、利用制限や退会処分となります。'
+            %button.comment_btn{ name: "button", type: "submit" }
+              = 'コメントする'
