@@ -19,4 +19,5 @@ class User < ApplicationRecord
 
   # バリデーション
   has_many :hobbies
+  has_many :messages
 end

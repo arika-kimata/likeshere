@@ -1,4 +1,7 @@
 ja:
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
   activerecord:
     attributes:
       user:
@@ -46,10 +49,6 @@ ja:
     - 木曜日
     - 金曜日
     - 土曜日
-    formats:
-      default: "%Y/%m/%d"
-      long: "%Y年%m月%d日(%a)"
-      short: "%m/%d"
     month_names:
     - 
     - 1月
@@ -107,13 +106,6 @@ ja:
       x_years:
         one: 1年
         other: "%{count}年"
-    prompts:
-      second: 秒
-      minute: 分
-      hour: 時
-      day: 日
-      month: 月
-      year: 年
   errors:
     format: "%{attribute}%{message}"
     messages:
@@ -206,10 +198,3 @@ ja:
       last_word_connector: "、"
       two_words_connector: "、"
       words_connector: "、"
-  time:
-    am: 午前
-    formats:
-      default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
-      long: "%Y/%m/%d %H:%M"
-      short: "%m/%d %H:%M"
-    pm: 午後
