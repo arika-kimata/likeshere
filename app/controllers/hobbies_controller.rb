@@ -1,10 +1,10 @@
 class HobbiesController < ApplicationController
   before_action :set_category, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_hobby, only: [:show, :edit, :update, :destroy]
+  before_action :session_user, only: [:edit, :update, :destroy]
 
   def index
     @hobbies = Hobby.includes(:user).order('created_at DESC')
-    # binding.pry
   end
 
   def new
@@ -49,6 +49,9 @@ class HobbiesController < ApplicationController
     @category_grandchild = @hobby.category
     @category_child = @category_grandchild.parent
     @category_parent = @category_child.parent
+    # メッセージモデルの記述
+    @message = Message.new
+    @messages = @hobby.messages.order('created_at DESC')
   end
 
   def edit
@@ -97,6 +100,10 @@ class HobbiesController < ApplicationController
 
   private
 
+  def hobby_params
+    params.require(:hobby).permit(:title, :release_date, :recommended, :synopsis, :category_id).merge(user_id: current_user.id)
+  end
+
   def set_hobby
     @hobby = Hobby.find(params[:id])
   end
@@ -105,7 +112,8 @@ class HobbiesController < ApplicationController
     @category_parent_array = Category.where(ancestry: nil)
   end
 
-  def hobby_params
-    params.require(:hobby).permit(:title, :release_date, :recommended, :synopsis, :category_id).merge(user_id: current_user.id)
+  def session_user
+    redirect_to root_path if current_user.id != @hobby.user_id
   end
+
 end
