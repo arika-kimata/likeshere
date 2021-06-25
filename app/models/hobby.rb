@@ -15,4 +15,13 @@ class Hobby < ApplicationRecord
   belongs_to :category
   belongs_to :user
   has_many :messages
+
+  def self.search(search)
+    if search != ""
+      Hobby.where('title LIKE(?)', "%#{search}%")
+    else
+      Hobby.all
+    end
+  end
+
 end

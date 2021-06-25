@@ -17,4 +17,5 @@ class Category < ApplicationRecord
 
     category = Category.find(grandchildren_id) if grandchildren_id.present? && grandchildren_id != '--'
   end
+  
 end
