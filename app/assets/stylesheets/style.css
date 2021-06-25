@@ -47,7 +47,13 @@ a {
   padding: 20px 0;
 
 }
+
 .inner {
+  width: 1024px;
+  margin: 0 auto;
+}
+
+.inner2 {
   width: 1024px;
   display: flex;
   flex-direction: column;
