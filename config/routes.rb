@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   root 'hobbies#index'
 
   resources :hobbies do
+    # コメント機能
     resources :messages, only: [:create, :destroy]
+    # カテゴリー機能
     mount ActionCable.server, at: '/cable'
     collection do
       get 'get_category_children', defaults: { format: 'json' }

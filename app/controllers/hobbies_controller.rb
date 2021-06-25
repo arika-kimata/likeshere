@@ -4,6 +4,7 @@ class HobbiesController < ApplicationController
   before_action :session_user, only: [:edit, :update, :destroy]
 
   def index
+    # 情報の取得
     @hobbies = Hobby.includes(:user).order('created_at DESC')
   end
 
