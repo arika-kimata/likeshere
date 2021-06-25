@@ -144,24 +144,29 @@ a {
 }
 
 .greeting2{
-  margin: 20px 0 5px;
+  margin-right: auto;
   color: #87CEFA;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .greeting__link{
   text-decoration: underline;
 }
+
 .page-heading {
   font-size: 30px;
   margin-bottom: 28px;
+  width: calc(100% - 5px);
 }
+
 .card__wrapper {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   min-height: calc(100vh - 161px);
+  width: calc(100% - 5px);
 }
+
 .card__tops {
   width: calc(100% - 50px);
   margin-bottom: 40px;
@@ -191,6 +196,7 @@ a {
 }
 
 .detail-title {
+  margin-right: auto;
   font-size: 30px;
 }
 

@@ -1,0 +1,11 @@
+= form_with(url: search_hobbies_path, local: true, method: :get, class: 'search-form') do |f|
+  = f.text_field :keyword, placeholder: '投稿を検索する', class: 'search-input'
+  = f.submit '検索', class: 'search-btn'
+.contents-row
+  @hobbies.each do |hobby|
+    .card__top
+      = link_to hobby.title, hobby_path(hobby.ids), method: :get, class: :card__title
+    .card__body
+      = hobby.recommended
+      %p.card__summary
+      = link_to hobby.user.nickname, user_path(hobby.user.id) , class: :card__user

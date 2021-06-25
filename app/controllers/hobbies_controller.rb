@@ -1,11 +1,16 @@
 class HobbiesController < ApplicationController
   before_action :set_category, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_hobby, only: [:show, :edit, :update, :destroy]
+  before_action :set_hobby, only: [:show, :edit, :update, :destroy, :search]
   before_action :session_user, only: [:edit, :update, :destroy]
+  #before_action :move_to_index, except: [:index, :show, :search]
 
   def index
     # 情報の取得
     @hobbies = Hobby.includes(:user).order('created_at DESC')
+  end
+
+  def search
+    #@hobbies = Hobby.search(params[:keyword])
   end
 
   def new
@@ -116,5 +121,11 @@ class HobbiesController < ApplicationController
   def session_user
     redirect_to root_path if current_user.id != @hobby.user_id
   end
+
+  #def move_to_index
+    #unless user_signed_in?
+      #redirect_to action: :index
+    #end
+  #end
 
 end
