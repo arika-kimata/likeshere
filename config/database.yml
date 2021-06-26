@@ -14,7 +14,7 @@ default: &default
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
+  password: 
   socket: /tmp/mysql.sock
 
 development:
@@ -51,4 +51,4 @@ production:
   <<: *default
   database: likeshere_production
   username: likeshere
-  password: piyo0711
+  password: <%= ENV['LIKESHERE_DATABASE_PASSWORD'] %>
